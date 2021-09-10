@@ -354,6 +354,22 @@ describe("EVMAPI", (): void => {
     expect(response).toBe("0x2540be400")
   })
 
+  test("getBlockNumber", async (): Promise<void> => {
+    const result: Promise<string> = api.getBlockNumber()
+    const payload: object = {
+      result: "0x0"
+    }
+    const responseObj: HttpResponse = {
+      data: payload
+    }
+
+    mockAxios.mockResponse(responseObj)
+    const response: string = await result
+
+    expect(mockAxios.request).toHaveBeenCalledTimes(1)
+    expect(response).toBe("0x0")
+  })
+
   test("getAtomicTx", async (): Promise<void> => {
     const txID: string = "FCry2Z1Su9KZqK1XRMhxQS6XuPorxDm3C3RBT7hw32ojiqyvP"
     const tx =

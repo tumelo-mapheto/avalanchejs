@@ -16,6 +16,13 @@ describe("CChain", (): void => {
       () => "0x34630b8a00"
     ],
     [
+      "getBlockNumber",
+      () => cchain.getBlockNumber(),
+      (x) => x,
+      Matcher.toBe,
+      () => "0x0"
+    ],
+    [
       "getMaxPriorityFeePerGas",
       () => cchain.getMaxPriorityFeePerGas(),
       (x) => x,
