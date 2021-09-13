@@ -40,7 +40,9 @@ import {
   GetUTXOsParams,
   ImportAVAXParams,
   ImportKeyParams,
-  ImportParams
+  ImportParams,
+  TransactionParams,
+  BlockParameter
 } from "./interfaces"
 
 /**
@@ -916,6 +918,27 @@ export class EVMAPI extends JRPCAPI {
     const params: string[] = []
 
     const method: string = "eth_blockNumber"
+    const path: string = "ext/bc/C/rpc"
+    const response: RequestResponseData = await this.callMethod(
+      method,
+      params,
+      path
+    )
+    return response.data.result
+  }
+
+  /**
+   * Executes a new message call without creating a transaction.
+   *
+   * @returns Returns a Promise<string> containing the value of the executed contract.
+   */
+  ethCall = async (
+    txParams: TransactionParams,
+    tag: BlockParameter
+  ): Promise<string> => {
+    const params = [txParams, tag]
+
+    const method: string = "eth_call"
     const path: string = "ext/bc/C/rpc"
     const response: RequestResponseData = await this.callMethod(
       method,

@@ -5,6 +5,7 @@ import BinTools from "../../../src/utils/bintools"
 import * as bech32 from "bech32"
 import { Defaults } from "../../../src/utils/constants"
 import { HttpResponse } from "jest-mock-axios/dist/lib/mock-axios-types"
+import { BlockParameter } from "src/apis/evm/interfaces"
 
 /**
  * @ignore
@@ -19,6 +20,10 @@ describe("EVMAPI", (): void => {
   const protocol: string = "https"
   const username: string = "AvaLabs"
   const password: string = "password"
+
+  const to: string = "0x197E90f9FAD81970bA7976f33CbD77088E5D7cf7"
+  const tag: BlockParameter = "latest"
+  const data: string = "0xc92aecc4"
 
   const avalanche: Avalanche = new Avalanche(
     ip,
@@ -356,6 +361,22 @@ describe("EVMAPI", (): void => {
 
   test("getBlockNumber", async (): Promise<void> => {
     const result: Promise<string> = api.getBlockNumber()
+    const payload: object = {
+      result: "0x0"
+    }
+    const responseObj: HttpResponse = {
+      data: payload
+    }
+
+    mockAxios.mockResponse(responseObj)
+    const response: string = await result
+
+    expect(mockAxios.request).toHaveBeenCalledTimes(1)
+    expect(response).toBe("0x0")
+  })
+
+  test("ethCall", async (): Promise<void> => {
+    const result: Promise<string> = api.ethCall({ to, data }, tag)
     const payload: object = {
       result: "0x0"
     }
