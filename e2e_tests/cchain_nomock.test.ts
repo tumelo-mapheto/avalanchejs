@@ -41,6 +41,13 @@ describe("CChain", (): void => {
       () => "0xa868"
     ],
     [
+      "getAvaxBalance",
+      () => cchain.getAvaxBalance(to, tag),
+      (x) => x,
+      Matcher.toBe,
+      () => "0x0"
+    ],
+    [
       "getMaxPriorityFeePerGas",
       () => cchain.getMaxPriorityFeePerGas(),
       (x) => x,

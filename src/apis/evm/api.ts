@@ -949,6 +949,27 @@ export class EVMAPI extends JRPCAPI {
   }
 
   /**
+   * get native asset balance.
+   *
+   * @returns Returns a Promise<string> containing the current balance in wei.
+   */
+  getAvaxBalance = async (
+    address: string,
+    tag: BlockParameter
+  ): Promise<string> => {
+    const params = [address, tag]
+
+    const method: string = "eth_getBalance"
+    const path: string = "ext/bc/C/rpc"
+    const response: RequestResponseData = await this.callMethod(
+      method,
+      params,
+      path
+    )
+    return response.data.result
+  }
+
+  /**
    * get chain ID.
    *
    * @returns Returns a Promise<string> containing the EIP155 Chain ID.
