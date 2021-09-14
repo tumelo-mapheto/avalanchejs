@@ -375,8 +375,8 @@ describe("EVMAPI", (): void => {
     expect(response).toBe("0x0")
   })
 
-  test("ethCall", async (): Promise<void> => {
-    const result: Promise<string> = api.ethCall({ to, data }, tag)
+  test("getEthCall", async (): Promise<void> => {
+    const result: Promise<string> = api.getEthCall({ to, data }, tag)
     const payload: object = {
       result: "0x0"
     }
@@ -391,8 +391,8 @@ describe("EVMAPI", (): void => {
     expect(response).toBe("0x0")
   })
 
-  test("ethChainID", async (): Promise<void> => {
-    const result: Promise<string> = api.ethChainID()
+  test("getEthChainID", async (): Promise<void> => {
+    const result: Promise<string> = api.getEthChainID()
     const payload: object = {
       result: "0xa868"
     }

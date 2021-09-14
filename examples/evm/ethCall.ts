@@ -14,7 +14,7 @@ const main = async (): Promise<any> => {
     to: "0x197E90f9FAD81970bA7976f33CbD77088E5D7cf7",
     data: "0xc92aecc4"
   }
-  const result: string = await cchain.ethCall(params, "latest")
+  const result: string = await cchain.getEthCall(params, "latest")
   console.log(result)
 }
 

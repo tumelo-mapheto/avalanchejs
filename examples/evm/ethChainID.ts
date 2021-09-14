@@ -9,7 +9,7 @@ const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
 const cchain: EVMAPI = avalanche.CChain()
 
 const main = async (): Promise<any> => {
-  const blockNumber: string = await cchain.ethChainID()
+  const blockNumber: string = await cchain.getEthChainID()
   console.log(blockNumber)
 }
 

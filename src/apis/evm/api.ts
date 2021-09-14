@@ -932,7 +932,7 @@ export class EVMAPI extends JRPCAPI {
    *
    * @returns Returns a Promise<string> containing the value of the executed contract.
    */
-  ethCall = async (
+  getEthCall = async (
     txParams: TransactionParams,
     tag: BlockParameter
   ): Promise<string> => {
@@ -953,7 +953,7 @@ export class EVMAPI extends JRPCAPI {
    *
    * @returns Returns a Promise<string> containing the EIP155 Chain ID.
    */
-  ethChainID = async (): Promise<string> => {
+  getEthChainID = async (): Promise<string> => {
     const params = []
 
     const method: string = "eth_chainId"

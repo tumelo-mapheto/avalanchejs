@@ -27,15 +27,15 @@ describe("CChain", (): void => {
       () => "0x0"
     ],
     [
-      "ethCall",
-      () => cchain.ethCall({ to, data }, tag),
+      "getEthCall",
+      () => cchain.getEthCall({ to, data }, tag),
       (x) => x,
       Matcher.toBe,
       () => "0x"
     ],
     [
-      "ethChainID",
-      () => cchain.ethChainID(),
+      "getEthChainID",
+      () => cchain.getEthChainID(),
       (x) => x,
       Matcher.toBe,
       () => "0xa868"
