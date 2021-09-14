@@ -947,4 +947,22 @@ export class EVMAPI extends JRPCAPI {
     )
     return response.data.result
   }
+
+  /**
+   * get chain ID.
+   *
+   * @returns Returns a Promise<string> containing the EIP155 Chain ID.
+   */
+  ethChainID = async (): Promise<string> => {
+    const params = []
+
+    const method: string = "eth_chainId"
+    const path: string = "ext/bc/C/rpc"
+    const response: RequestResponseData = await this.callMethod(
+      method,
+      params,
+      path
+    )
+    return response.data.result
+  }
 }

@@ -34,6 +34,13 @@ describe("CChain", (): void => {
       () => "0x"
     ],
     [
+      "ethChainID",
+      () => cchain.ethChainID(),
+      (x) => x,
+      Matcher.toBe,
+      () => "0xa868"
+    ],
+    [
       "getMaxPriorityFeePerGas",
       () => cchain.getMaxPriorityFeePerGas(),
       (x) => x,

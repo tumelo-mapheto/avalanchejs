@@ -391,6 +391,22 @@ describe("EVMAPI", (): void => {
     expect(response).toBe("0x0")
   })
 
+  test("ethChainID", async (): Promise<void> => {
+    const result: Promise<string> = api.ethChainID()
+    const payload: object = {
+      result: "0xa868"
+    }
+    const responseObj: HttpResponse = {
+      data: payload
+    }
+
+    mockAxios.mockResponse(responseObj)
+    const response: string = await result
+
+    expect(mockAxios.request).toHaveBeenCalledTimes(1)
+    expect(response).toBe("0xa868")
+  })
+
   test("getAtomicTx", async (): Promise<void> => {
     const txID: string = "FCry2Z1Su9KZqK1XRMhxQS6XuPorxDm3C3RBT7hw32ojiqyvP"
     const tx =
