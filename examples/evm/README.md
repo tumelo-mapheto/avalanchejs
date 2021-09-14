@@ -10,6 +10,7 @@ Tests for the Avalanche [EVM](https://docs.avax.network/build/avalanchego-apis/c
 * [exportTx-avax-xchain.ts](./exportTx-avax-xchain.ts)
 * [getAssetBalance.ts](./getAssetBalance.ts)
 * [getAvaxBalance.ts](./getAvaxBalance.ts)
+* [getTransactionCount.ts](./getTransactionCount.ts)
 * [getBaseFee.ts](./getBaseFee.ts)
 * [getMaxPriorityFeePerGas.ts](./getMaxPriorityFeePerGas.ts)
 * [getBlockNumber.ts](./getBlockNumber.ts)

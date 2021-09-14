@@ -48,6 +48,13 @@ describe("CChain", (): void => {
       () => "0x0"
     ],
     [
+      "getTransactionCount",
+      () => cchain.getTransactionCount(to, tag),
+      (x) => x,
+      Matcher.toBe,
+      () => "0x0"
+    ],
+    [
       "getMaxPriorityFeePerGas",
       () => cchain.getMaxPriorityFeePerGas(),
       (x) => x,

@@ -291,7 +291,26 @@ describe("EVMAPI", (): void => {
     mockAxios.mockResponse(responseObj)
     const response: string = await result
     expect(mockAxios.request).toHaveBeenCalledTimes(1)
-    expect(response["result"]).toBe(hexStr)
+    expect(response).toBe(hexStr)
+  })
+
+  test("getTransactionCount", async (): Promise<void> => {
+    const address: string = "0x9632a79656af553F58738B0FB750320158495942"
+    const tag: BlockParameter = "latest"
+    const hexStr: string = "0x0"
+
+    const result: Promise<string> = api.getTransactionCount(address, tag)
+    const payload: object = {
+      result: hexStr
+    }
+    const responseObj: HttpResponse = {
+      data: payload
+    }
+
+    mockAxios.mockResponse(responseObj)
+    const response: string = await result
+    expect(mockAxios.request).toHaveBeenCalledTimes(1)
+    expect(response).toBe(hexStr)
   })
 
   test("getAssetBalance with bad assetID", async (): Promise<void> => {
