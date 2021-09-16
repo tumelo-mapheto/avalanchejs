@@ -19,4 +19,5 @@ Tests for the Avalanche [EVM](https://docs.avax.network/build/avalanchego-apis/c
 * [getEthChainID.ts](./getEthChainID.ts)
 * [getAtomicTx.ts](./getAtomicTx.ts)
 * [getAtomicTxStatus.ts](./getAtomicTxStatus.ts)
+* [sendRawTransaction.ts](./sendRawTransaction.ts)
 * [importTx-xchain.ts](./importTx-xchain.ts)

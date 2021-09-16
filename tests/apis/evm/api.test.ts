@@ -312,6 +312,28 @@ describe("EVMAPI", (): void => {
     expect(mockAxios.request).toHaveBeenCalledTimes(1)
     expect(response).toBe(null)
   })
+
+  test("sendRawTransaction", async (): Promise<void> => {
+    const rawTx: string =
+      "0xf86f018534630b8a0082520894197e90f9fad81970ba7976f33cbd77088e5d7cf7880de0b6b3a764000080830150f3a076b648783e587efc207974021eb90ac96a96d28a12605688c288fd540e3dec06a0560e83ac70bafc901caa67d2e36677212ff2163451f23209c61949a6788faaa6"
+
+    const result: Promise<string> = api.sendRawTransaction(rawTx)
+    const payload: object = {
+      result:
+        "0xf72d312e9ed3f48bc84a56ea9fe39cc48bebede5be01d2c40a108a2b3360de2f"
+    }
+    const responseObj: HttpResponse = {
+      data: payload
+    }
+
+    mockAxios.mockResponse(responseObj)
+    const response: string = await result
+    expect(mockAxios.request).toHaveBeenCalledTimes(1)
+    expect(response).toBe(
+      "0xf72d312e9ed3f48bc84a56ea9fe39cc48bebede5be01d2c40a108a2b3360de2f"
+    )
+  })
+
   test("getTransactionCount", async (): Promise<void> => {
     const address: string = "0x9632a79656af553F58738B0FB750320158495942"
     const tag: BlockParameter = "latest"

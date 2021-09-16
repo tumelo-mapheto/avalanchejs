@@ -1009,6 +1009,24 @@ export class EVMAPI extends JRPCAPI {
   }
 
   /**
+   * Broadcast an already signed transaction.
+   *
+   * @returns Returns a Promise<string> containing the resulting transaction hash.
+   */
+  sendRawTransaction = async (rawTx: string): Promise<string> => {
+    const params = [rawTx]
+
+    const method: string = "eth_sendRawTransaction"
+    const path: string = "ext/bc/C/rpc"
+    const response: RequestResponseData = await this.callMethod(
+      method,
+      params,
+      path
+    )
+    return response.data.result
+  }
+
+  /**
    * Submit a hash to get the block it's in.
    *
    * @returns Returns a Promise<string> containing the Block of the transaction.
