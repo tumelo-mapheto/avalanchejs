@@ -10,6 +10,8 @@ describe("CChain", (): void => {
   const to: string = "0x197E90f9FAD81970bA7976f33CbD77088E5D7cf7"
   const tag: BlockParameter = "latest"
   const data: string = "0xc92aecc4"
+  const hash: string =
+    "0x14d9c2aeec20254d966a947e23eb3172ae5067e66fd4e69aecc3c9d6ff24443a"
   // test_name        response_promise                            resp_fn          matcher           expected_value/obtained_value
   const tests_spec: any = [
     [
@@ -53,6 +55,13 @@ describe("CChain", (): void => {
       (x) => x,
       Matcher.toBe,
       () => "0x0"
+    ],
+    [
+      "getBlockByHash",
+      () => cchain.getBlockByHash(hash, true),
+      (x) => x,
+      Matcher.toBe,
+      () => null
     ],
     [
       "getMaxPriorityFeePerGas",

@@ -1007,4 +1007,22 @@ export class EVMAPI extends JRPCAPI {
     )
     return response.data.result
   }
+
+  /**
+   * Submit a hash to get the block it's in.
+   *
+   * @returns Returns a Promise<string> containing the Block of the transaction.
+   */
+  getBlockByHash = async (hash: string, boolean: boolean): Promise<string> => {
+    const params = [hash, boolean]
+
+    const method: string = "eth_getBlockByHash"
+    const path: string = "ext/bc/C/rpc"
+    const response: RequestResponseData = await this.callMethod(
+      method,
+      params,
+      path
+    )
+    return response.data.result
+  }
 }

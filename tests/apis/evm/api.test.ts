@@ -294,6 +294,24 @@ describe("EVMAPI", (): void => {
     expect(response).toBe(hexStr)
   })
 
+  test("getBlockByHash", async (): Promise<void> => {
+    const address: string =
+      "0x14d9c2aeec20254d966a947e23eb3172ae5067e66fd4e69aecc3c9d6ff24443a"
+    const bool: boolean = true
+
+    const result: Promise<string> = api.getBlockByHash(address, bool)
+    const payload: object = {
+      result: null
+    }
+    const responseObj: HttpResponse = {
+      data: payload
+    }
+
+    mockAxios.mockResponse(responseObj)
+    const response: string = await result
+    expect(mockAxios.request).toHaveBeenCalledTimes(1)
+    expect(response).toBe(null)
+  })
   test("getTransactionCount", async (): Promise<void> => {
     const address: string = "0x9632a79656af553F58738B0FB750320158495942"
     const tag: BlockParameter = "latest"

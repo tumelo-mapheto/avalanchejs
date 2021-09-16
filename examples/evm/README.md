@@ -14,6 +14,7 @@ Tests for the Avalanche [EVM](https://docs.avax.network/build/avalanchego-apis/c
 * [getBaseFee.ts](./getBaseFee.ts)
 * [getMaxPriorityFeePerGas.ts](./getMaxPriorityFeePerGas.ts)
 * [getBlockNumber.ts](./getBlockNumber.ts)
+* [getBlockByHash.ts](./getBlockByHash.ts)
 * [getEthCall.ts](./getEthCall.ts)
 * [getEthChainID.ts](./getEthChainID.ts)
 * [getAtomicTx.ts](./getAtomicTx.ts)
