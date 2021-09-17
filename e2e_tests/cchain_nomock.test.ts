@@ -8,6 +8,8 @@ describe("CChain", (): void => {
   const cchain = avalanche.CChain()
   const keystore = new KeystoreAPI(avalanche)
 
+  let exportTxHash = { value: "" }
+
   const user: string = "avalancheJsCChainUser"
   const passwd: string = "avalancheJsP@ssw4rd"
   const key: string =
@@ -22,6 +24,7 @@ describe("CChain", (): void => {
   const txHash: string =
     "0x58cbd8363e9bf3258779599f482f914e6646c8bee63b6f65c311d134f547f3f2"
   const whaleAddr: string = "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"
+  const xChainAddr: string = "X-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u"
 
   // test_name        response_promise                            resp_fn          matcher           expected_value/obtained_value
   const tests_spec: any = [
@@ -38,6 +41,13 @@ describe("CChain", (): void => {
       (x) => x,
       Matcher.toBe,
       () => whaleAddr
+    ],
+    [
+      "exportAVAX",
+      () => cchain.exportAVAX(user, passwd, xChainAddr, new BN(10)),
+      (x) => x,
+      Matcher.Get,
+      () => exportTxHash
     ],
     [
       "getBaseFee",
