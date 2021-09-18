@@ -16,6 +16,7 @@ import {
   DefaultLocalGenesisPrivateKey,
   Defaults
 } from "../../src/utils"
+import { ethers, BigNumber } from "ethers"
 
 const ip: string = "localhost"
 const port: number = 9650
@@ -41,9 +42,14 @@ const avaxAssetID: string = Defaults.network[networkID].X.avaxAssetID
 const avaxAssetIDBuf: Buffer = bintools.cb58Decode(avaxAssetID)
 const evmInputs: EVMInput[] = []
 let exportedOuts: TransferableOutput[] = []
-const Web3 = require("web3")
 const path: string = "/ext/bc/C/rpc"
-const web3 = new Web3(`${protocol}://${ip}:${port}${path}`)
+const provider = new ethers.providers.JsonRpcProvider(
+  `${protocol}://${ip}:${port}${path}`,
+  {
+    chainId: 43112,
+    name: "avash"
+  }
+)
 const threshold: number = 1
 
 const main = async (): Promise<any> => {
@@ -59,10 +65,10 @@ const main = async (): Promise<any> => {
     antAssetBalanceResponse.data.result,
     16
   )
-  let avaxBalance: BN = await web3.eth.getBalance(cHexAddress)
+  let avaxBalance: BN | BigNumber = await provider.getBalance(cHexAddress)
   avaxBalance = new BN(avaxBalance.toString().substring(0, 17))
   const fee: BN = cchain.getDefaultTxFee()
-  const txcount = await web3.eth.getTransactionCount(cHexAddress)
+  const txcount = await provider.getTransactionCount(cHexAddress)
   const nonce: number = txcount
   const locktime: BN = new BN(0)
 
