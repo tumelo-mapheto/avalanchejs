@@ -133,7 +133,7 @@ describe("CChain", (): void => {
       () => cchain.getMaxPriorityFeePerGas(),
       (x) => x,
       Matcher.toBe,
-      () => "0x2540be400"
+      () => "0x0"
     ],
     [
       "exportKey",

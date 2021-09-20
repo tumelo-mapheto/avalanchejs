@@ -10,7 +10,7 @@ is_bootstrapped () {
 avalanchego_ip=127.0.0.1
 avalanchego_ports=$(seq 9650 2 9658)
 
-max_bootstrapping_time=120
+max_bootstrapping_time=130
 
 [ $# != 2 ] && echo usage: $0 avash_dir avalanchejs_dir && exit 1
 

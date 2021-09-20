@@ -236,22 +236,27 @@ describe("PChain", (): void => {
       "exportAVAX",
       () => pchain.exportAVAX(user, passwd, new BN(10), xChainAddr),
       (x) => x,
-      Matcher.Get,
-      () => tx
+      Matcher.toThrow,
+      () =>
+        "failed semanticVerifySpend: failed to read consumed UTXO 11111111111111111111111111111111LpoYY:0 due to: not found"
     ],
     [
       "getTx",
       () => pchain.getTx(tx.value),
       (x) => x,
       Matcher.toThrow,
-      () => "couldn't get tx: not found"
+      () =>
+        "couldn't unmarshal an argument. Ensure arguments are valid and properly formatted. See documentation for example calls"
     ],
     [
       "getTxStatus",
-      () => pchain.getTxStatus(tx.value),
-      (x) => x.status,
+      () =>
+        pchain.getTxStatus(
+          "2JxmsgSJxMrddRUsKCxAagdvax3s6kY9xiivyzHRMqFfuRjFi2"
+        ),
+      (x) => x,
       Matcher.toEqual,
-      () => "Dropped"
+      () => ({ status: "Unknown" })
     ],
     [
       "importAVAX",
