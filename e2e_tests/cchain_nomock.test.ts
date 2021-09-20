@@ -14,6 +14,8 @@ describe("CChain", (): void => {
   const passwd: string = "avalancheJsP@ssw4rd"
   const key: string =
     "PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN"
+  const privateKeyHex: string =
+    "0x56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027"
   const to: string = "0x197e90f9fad81970ba7976f33cbd77088e5d7cf7"
   const tag: BlockParameter = "latest"
   const data: string = "0xc92aecc4"
@@ -111,6 +113,16 @@ describe("CChain", (): void => {
       (x) => x,
       Matcher.toBe,
       () => "0x2540be400"
+    ],
+    [
+      "exportKey",
+      () => cchain.exportKey(user, passwd, whaleAddr),
+      (x) => x,
+      Matcher.toEqual,
+      () => ({
+        privateKey: key,
+        privateKeyHex: privateKeyHex
+      })
     ]
   ]
 
