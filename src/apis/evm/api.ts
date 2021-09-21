@@ -1041,4 +1041,22 @@ export class EVMAPI extends JRPCAPI {
     )
     return response.data.result
   }
+
+  /**
+   * Hashes data using Keccak-256.
+   *
+   * @returns Returns a Promise<string> Kecca-256 hash of the given data.
+   */
+  web3Sha3 = async (data: string): Promise<string> => {
+    const params = [data]
+
+    const method: string = "web3_sha3"
+    const path: string = "ext/bc/C/rpc"
+    const response: RequestResponseData = await this.callMethod(
+      method,
+      params,
+      path
+    )
+    return response.data.result
+  }
 }

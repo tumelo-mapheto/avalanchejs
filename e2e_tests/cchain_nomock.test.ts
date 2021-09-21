@@ -108,6 +108,13 @@ describe("CChain", (): void => {
       () => txHash
     ],
     [
+      "web3Sha3",
+      () => cchain.web3Sha3(data),
+      (x) => x,
+      Matcher.toBe,
+      () => "0x33d900c038e159887701e03767765494e2095283ea534e93656732c6c8fc358d"
+    ],
+    [
       "getMaxPriorityFeePerGas",
       () => cchain.getMaxPriorityFeePerGas(),
       (x) => x,

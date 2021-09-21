@@ -490,6 +490,25 @@ describe("EVMAPI", (): void => {
     expect(response).toBe("0xa868")
   })
 
+  test("web3Sha3", async (): Promise<void> => {
+    const result: Promise<string> = api.web3Sha3(data)
+    const payload: object = {
+      result:
+        "0x627119bb8286874a15d562d32829613311a678da26ca7a6a785ec4ad85937d06"
+    }
+    const responseObj: HttpResponse = {
+      data: payload
+    }
+
+    mockAxios.mockResponse(responseObj)
+    const response: string = await result
+
+    expect(mockAxios.request).toHaveBeenCalledTimes(1)
+    expect(response).toBe(
+      "0x627119bb8286874a15d562d32829613311a678da26ca7a6a785ec4ad85937d06"
+    )
+  })
+
   test("getAtomicTx", async (): Promise<void> => {
     const txID: string = "FCry2Z1Su9KZqK1XRMhxQS6XuPorxDm3C3RBT7hw32ojiqyvP"
     const tx =
