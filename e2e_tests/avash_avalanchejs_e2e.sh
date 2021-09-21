@@ -8,9 +8,7 @@ is_bootstrapped () {
 }
 
 avalanchego_ip=127.0.0.1
-avalanchego_port=9650
-
-network_ports=$(seq 9650 2 9658)
+avalanchego_ports=$(seq 9650 2 9658)
 
 max_bootstrapping_time=90
 
@@ -18,9 +16,6 @@ max_bootstrapping_time=90
 
 avash_location=$1
 avalanchejs_location=$2
-
-export AVALANCHEGO_IP=$avalanchego_ip
-export AVALANCHEGO_PORT=$avalanchego_port
 
 # make absolute paths
 avash_location=$(cd $avash_location; pwd)
@@ -41,16 +36,16 @@ echo runscript scripts/five_node_staking.lua >> $fifo_fname
 start_time=$(date -u +%s)
 elapsed=0
 sleep 2
-for port in $network_ports
+for port in $avalanchego_ports
 do
-    echo waiting bootstrapping for node $AVALANCHEGO_IP:$port
-    is_bootstrapped $AVALANCHEGO_IP $port
+    echo waiting bootstrapping for node $avalanchego_ip:$port
+    is_bootstrapped $avalanchego_ip $port
     while [ $? != 0 ] && [ $elapsed -lt $max_bootstrapping_time ]
     do
         sleep 5
         end_time=$(date -u +%s)
         elapsed=$(($end_time-$start_time))
-        is_bootstrapped $AVALANCHEGO_IP $port
+        is_bootstrapped $avalanchego_ip $port
     done
 done
 echo elapsed: $elapsed seconds
@@ -60,6 +55,9 @@ then
 fi
 
 # execute tests
+export AVALANCHEGO_IP=$avalanchego_ip
+export AVALANCHEGO_PORT=$(echo $avalanchego_ports | cut -d" " -f1)
+echo testing on avalanchego $AVALANCHEGO_IP:$AVALANCHEGO_PORT
 cd $avalanchejs_location
 yarn test -i --roots e2e_tests
 
