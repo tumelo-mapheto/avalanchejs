@@ -115,6 +115,13 @@ describe("CChain", (): void => {
       () => "0x33d900c038e159887701e03767765494e2095283ea534e93656732c6c8fc358d"
     ],
     [
+      "web3ClientVersion",
+      () => cchain.web3ClientVersion(),
+      (x) => x,
+      Matcher.toMatch,
+      () => /v+/
+    ],
+    [
       "getMaxPriorityFeePerGas",
       () => cchain.getMaxPriorityFeePerGas(),
       (x) => x,

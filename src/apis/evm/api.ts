@@ -1059,4 +1059,22 @@ export class EVMAPI extends JRPCAPI {
     )
     return response.data.result
   }
+
+  /**
+   * Returns the current client version.
+   *
+   * @returns Returns a Promise<string> with the client version.
+   */
+  web3ClientVersion = async (): Promise<string> => {
+    const params = []
+
+    const method: string = "web3_clientVersion"
+    const path: string = "ext/bc/C/rpc"
+    const response: RequestResponseData = await this.callMethod(
+      method,
+      params,
+      path
+    )
+    return response.data.result
+  }
 }

@@ -22,3 +22,4 @@ Tests for the Avalanche [EVM](https://docs.avax.network/build/avalanchego-apis/c
 * [sendRawTransaction.ts](./sendRawTransaction.ts)
 * [importTx-xchain.ts](./importTx-xchain.ts)
 * [web3Sha3.ts](./web3Sha3.ts)
+* [web3ClientVersion.ts](./web3ClientVersion.ts)
