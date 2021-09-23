@@ -1077,4 +1077,22 @@ export class EVMAPI extends JRPCAPI {
     )
     return response.data.result
   }
+
+  /**
+   * Returns the current network id.
+   *
+   * @returns Returns a Promise<string> with the network id.
+   */
+  netVersion = async (): Promise<string> => {
+    const params = []
+
+    const method: string = "net_version"
+    const path: string = "ext/bc/C/rpc"
+    const response: RequestResponseData = await this.callMethod(
+      method,
+      params,
+      path
+    )
+    return response.data.result
+  }
 }

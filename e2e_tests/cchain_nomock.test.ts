@@ -122,6 +122,13 @@ describe("CChain", (): void => {
       () => /v+/
     ],
     [
+      "netVersion",
+      () => cchain.netVersion(),
+      (x) => x,
+      Matcher.toBe,
+      () => "1"
+    ],
+    [
       "getMaxPriorityFeePerGas",
       () => cchain.getMaxPriorityFeePerGas(),
       (x) => x,

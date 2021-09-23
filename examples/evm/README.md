@@ -23,3 +23,4 @@ Tests for the Avalanche [EVM](https://docs.avax.network/build/avalanchego-apis/c
 * [importTx-xchain.ts](./importTx-xchain.ts)
 * [web3Sha3.ts](./web3Sha3.ts)
 * [web3ClientVersion.ts](./web3ClientVersion.ts)
+* [netVersion.ts](./netVersion.ts)

@@ -525,6 +525,22 @@ describe("EVMAPI", (): void => {
     expect(response).toBe("v0.6.3")
   })
 
+  test("netVersion", async (): Promise<void> => {
+    const result: Promise<string> = api.netVersion()
+    const payload: object = {
+      result: "1"
+    }
+    const responseObj: HttpResponse = {
+      data: payload
+    }
+
+    mockAxios.mockResponse(responseObj)
+    const response: string = await result
+
+    expect(mockAxios.request).toHaveBeenCalledTimes(1)
+    expect(response).toBe("1")
+  })
+
   test("getAtomicTx", async (): Promise<void> => {
     const txID: string = "FCry2Z1Su9KZqK1XRMhxQS6XuPorxDm3C3RBT7hw32ojiqyvP"
     const tx =
