@@ -4,13 +4,13 @@ is_bootstrapped () {
     [ $# != 2 ] && echo is_bootstrapped requires two arguments: node_ip node_port && exit 1
     node_ip=$1
     node_port=$2
-    curl -s -X POST --data '{"jsonrpc":"2.0", "id":1, "method":"info.isBootstrapped", "params":{"chain":"X"}}' -H 'content-type:application/json;' $node_ip:$node_port/ext/info | grep true > /dev/null
+    curl -s -X POST --data '{ "jsonrpc":"2.0", "id"     :1, "method" :"health.getLiveness" }' -H 'content-type:application/json;' $node_ip:$node_port/ext/health | grep true > /dev/null
 }
 
 avalanchego_ip=127.0.0.1
 avalanchego_ports=$(seq 9650 2 9658)
 
-max_bootstrapping_time=90
+max_bootstrapping_time=120
 
 [ $# != 2 ] && echo usage: $0 avash_dir avalanchejs_dir && exit 1
 
@@ -30,7 +30,7 @@ sleep 6000 > $fifo_fname &
 # start avash network
 cd $avash_location
 ./avash < $fifo_fname &
-echo runscript scripts/five_node_staking.lua >> $fifo_fname 
+echo runscript scripts/five_node_staking.lua >> $fifo_fname
 
 # wait network bootstrapping
 start_time=$(date -u +%s)
@@ -63,7 +63,7 @@ yarn test -i --roots e2e_tests
 
 # end avash network
 cd $avash_location
-echo exit >> $fifo_fname 
+echo exit >> $fifo_fname
 
 # cleanup
 rm -f $fifo_fname
