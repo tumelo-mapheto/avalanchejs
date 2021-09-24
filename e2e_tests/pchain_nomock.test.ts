@@ -28,6 +28,8 @@ describe("PChain", (): void => {
   const nodeID: string = "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg"
   const subnetID: string = "2bGsYJorY6X7RhjPBFs3kYjiNEHo4zGrD2eeyZbb43T2KKi7fM"
   const xChainAddr: string = "X-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u"
+  const avalancheBlockChainID: string =
+    "2VvmkRw4yrz8tPrVnCCbvEK1JxNyujpqhmU6SGonxMpkWBx9UD"
 
   // test_name        response_promise                            resp_fn          matcher           expected_value/obtained_value
   const tests_spec: any = [
@@ -97,6 +99,39 @@ describe("PChain", (): void => {
       () => "2eNy1mUFdmaxXNj1eQHUe7Np4gju9sJsEtWQ4MX3ToiNKuADed"
     ],
     [
+      "getBlockchainStatus",
+      () => pchain.getBlockchainStatus(avalancheBlockChainID),
+      (x) => x,
+      Matcher.toBe,
+      () => "Created"
+    ],
+    [
+      "getCurrentSupply",
+      () => pchain.getCurrentSupply(),
+      (x) => {
+        return x.toString()
+      },
+      Matcher.toBe,
+      () => "361196333750752149"
+    ],
+    [
+      "getHeight",
+      () => pchain.getHeight(),
+      (x) => x.toString(),
+      Matcher.toEqual,
+      () => "0"
+    ],
+    [
+      "getMinStake",
+      () => pchain.getMinStake(),
+      (x) => {
+        console.log("min stake", x.minDelegatorStake.toString())
+        return x.minDelegatorStake.toString()
+      },
+      Matcher.toBe,
+      () => "5000000"
+    ],
+    [
       "importKey",
       () => pchain.importKey(user, passwd, key),
       (x) => x,
@@ -120,6 +155,13 @@ describe("PChain", (): void => {
       },
       Matcher.Get,
       () => createdSubnetID
+    ],
+    [
+      "getCurrentValidators",
+      () => pchain.getCurrentValidators(),
+      (x) => x.validators.length,
+      Matcher.toBe,
+      () => 5
     ],
 
     [
