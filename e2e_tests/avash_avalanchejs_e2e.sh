@@ -38,7 +38,7 @@ elapsed=0
 sleep 2
 for port in $avalanchego_ports
 do
-    echo waiting bootstrapping for node $avalanchego_ip:$port
+    echo waiting for node $avalanchego_ip:$port to finish bootstrapping
     is_bootstrapped $avalanchego_ip $port
     while [ $? != 0 ] && [ $elapsed -lt $max_bootstrapping_time ]
     do
