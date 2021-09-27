@@ -31,6 +31,8 @@ describe("PChain", (): void => {
   const avalancheBlockChainID: string =
     "2VvmkRw4yrz8tPrVnCCbvEK1JxNyujpqhmU6SGonxMpkWBx9UD"
 
+  const rewardUTXOTxID: string =
+    "2nmH8LithVbdjaXsxVQCQfXtzN9hBbmebrsaEYnLM9T32Uy2Y4"
   // test_name        response_promise                            resp_fn          matcher           expected_value/obtained_value
   const tests_spec: any = [
     [
@@ -125,7 +127,6 @@ describe("PChain", (): void => {
       "getMinStake",
       () => pchain.getMinStake(),
       (x) => {
-        console.log("min stake", x.minDelegatorStake.toString())
         return x.minDelegatorStake.toString()
       },
       Matcher.toBe,
@@ -162,6 +163,27 @@ describe("PChain", (): void => {
       (x) => x.validators.length,
       Matcher.toBe,
       () => 5
+    ],
+    [
+      "getRewardUTXOs",
+      () => pchain.getRewardUTXOs(rewardUTXOTxID),
+      (x) => x.utxos.length,
+      Matcher.toBe,
+      () => 0
+    ],
+    [
+      "getStakeOutputs",
+      () => pchain.getStake([whaleAddr]),
+      (x) => x.stakedOutputs.length,
+      Matcher.toBe,
+      () => 0
+    ],
+    [
+      "getStake",
+      () => pchain.getStake([whaleAddr]),
+      (x) => x.staked.toString(),
+      Matcher.toBe,
+      () => "0"
     ],
 
     [
@@ -218,27 +240,26 @@ describe("PChain", (): void => {
       () => tx
     ],
     [
+      "getTx",
+      () => pchain.getTx(tx.value),
+      (x) => x,
+      Matcher.toThrow,
+      () => "couldn't get tx: not found"
+    ],
+    [
+      "getTxStatus",
+      () => pchain.getTxStatus(tx.value),
+      (x) => x.status,
+      Matcher.toEqual,
+      () => "Dropped"
+    ],
+    [
       "importAVAX",
       () => pchain.importAVAX(user, passwd, addrB.value, "X"),
       (x) => x,
       Matcher.toThrow,
       () => "no spendable funds were found"
     ]
-
-    // [
-    //   "getTx",
-    //   () => pchain.getTx(tx.value),
-    //   (x) => x,
-    //   Matcher.toMatch,
-    //   () => /\w+/
-    // ],
-    // [
-    //   "getTxStatus",
-    //   () => pchain.getTxStatus(tx.value),
-    //   (x) => x,
-    //   Matcher.toBe,
-    //   () => "Processing"
-    // ]
   ]
 
   createTests(tests_spec)
