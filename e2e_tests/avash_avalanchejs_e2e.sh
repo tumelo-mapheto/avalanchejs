@@ -64,6 +64,7 @@ yarn test -i --roots e2e_tests
 # end avash network
 cd $avash_location
 echo exit >> $fifo_fname
+echo killall avalanchego
 
 # cleanup
 rm -f $fifo_fname
