@@ -43,15 +43,11 @@ export class IndexAPI extends JRPCAPI {
       encoding
     }
 
-    try {
-      const response: RequestResponseData = await this.callMethod(
-        "index.getLastAccepted",
-        params
-      )
-      return response.data.result
-    } catch (error) {
-      console.log(error)
-    }
+    const response: RequestResponseData = await this.callMethod(
+      "index.getLastAccepted",
+      params
+    )
+    return response.data.result
   }
 
   /**
@@ -74,15 +70,11 @@ export class IndexAPI extends JRPCAPI {
       encoding
     }
 
-    try {
-      const response: RequestResponseData = await this.callMethod(
-        "index.getContainerByIndex",
-        params
-      )
-      return response.data.result
-    } catch (error) {
-      console.log(error)
-    }
+    const response: RequestResponseData = await this.callMethod(
+      "index.getContainerByIndex",
+      params
+    )
+    return response.data.result
   }
 
   /**
@@ -105,15 +97,11 @@ export class IndexAPI extends JRPCAPI {
       encoding
     }
 
-    try {
-      const response: RequestResponseData = await this.callMethod(
-        "index.getContainerByID",
-        params
-      )
-      return response.data.result
-    } catch (error) {
-      console.log(error)
-    }
+    const response: RequestResponseData = await this.callMethod(
+      "index.getContainerByID",
+      params
+    )
+    return response.data.result
   }
 
   /**
@@ -139,15 +127,11 @@ export class IndexAPI extends JRPCAPI {
       encoding
     }
 
-    try {
-      const response: RequestResponseData = await this.callMethod(
-        "index.getContainerRange",
-        params
-      )
-      return response.data.result
-    } catch (error) {
-      console.log(error)
-    }
+    const response: RequestResponseData = await this.callMethod(
+      "index.getContainerRange",
+      params
+    )
+    return response.data.result
   }
 
   /**
@@ -170,15 +154,11 @@ export class IndexAPI extends JRPCAPI {
       encoding
     }
 
-    try {
-      const response: RequestResponseData = await this.callMethod(
-        "index.getIndex",
-        params
-      )
-      return response.data.result.index
-    } catch (error) {
-      console.log(error)
-    }
+    const response: RequestResponseData = await this.callMethod(
+      "index.getIndex",
+      params
+    )
+    return response.data.result
   }
 
   /**
@@ -201,15 +181,11 @@ export class IndexAPI extends JRPCAPI {
       encoding
     }
 
-    try {
-      const response: RequestResponseData = await this.callMethod(
-        "index.isAccepted",
-        params
-      )
-      return response.data.result
-    } catch (error) {
-      console.log(error)
-    }
+    const response: RequestResponseData = await this.callMethod(
+      "index.isAccepted",
+      params
+    )
+    return response.data.result
   }
 
   /**
