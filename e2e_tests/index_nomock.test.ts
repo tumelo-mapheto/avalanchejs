@@ -19,7 +19,7 @@ describe("Index", () => {
   const key: string =
     "PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN"
 
-  const encoding: string = "cb58"
+  const encoding: string = "hex"
   const baseurl: string = "/ext/index/X/tx"
   const cContainerID: string =
     "2ceDnmxh59AsXqTG95vf3dr2a7ohXprNn9mvWgQJ39uHryBecT"
@@ -108,6 +108,52 @@ describe("Index", () => {
       "getXisAccepted",
       async () => {
         Index.isAccepted(cContainerID, "hex", "ext/index/X/tx")
+      },
+      (x) => x,
+      Matcher.toBe,
+      () => undefined
+    ],
+    [
+      "getXVerticeLastAccepted",
+      async () => {
+        await Index.getLastAccepted(encoding, "/ext/index/X/vtx")
+      },
+      (x) => x,
+      Matcher.toThrow,
+      () => "no containers have been accepted"
+    ],
+
+    [
+      "getXVerticeContainerByIndex",
+      async () => {
+        await Index.getContainerByIndex("0", encoding, "/ext/index/X/vtx")
+      },
+      (x) => x,
+      Matcher.toThrow,
+      () => "not found"
+    ],
+    [
+      "getXVerticeContainerRange",
+      async () => {
+        await Index.getContainerRange(0, 100, "hex", "/ext/index/X/vtx")
+      },
+      (x) => x,
+      Matcher.toThrow,
+      () => "no containers have been accepted"
+    ],
+    [
+      "getXVerticeIndex",
+      async () => {
+        Index.getIndex(cContainerID, "hex", "ext/index/X/vtx")
+      },
+      (x) => x,
+      Matcher.toBe,
+      () => undefined
+    ],
+    [
+      "getXVerticeisAccepted",
+      async () => {
+        Index.isAccepted(cContainerID, "hex", "ext/index/X/vtx")
       },
       (x) => x,
       Matcher.toBe,
