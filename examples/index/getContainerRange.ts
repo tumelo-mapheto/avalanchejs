@@ -1,6 +1,6 @@
 import { Avalanche } from "../../src"
 import { IndexAPI } from "../../src/apis/index"
-import { GetContainerRangeResponse } from "../../src/common/interfaces"
+import { GetContainerRangeResponse } from "../../src/apis/index/interfaces"
 
 const ip: string = "localhost"
 const port: number = 9650
