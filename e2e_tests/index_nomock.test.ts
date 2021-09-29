@@ -158,6 +158,52 @@ describe("Index", () => {
       (x) => x,
       Matcher.toBe,
       () => undefined
+    ],
+    [
+      "getCLastAccepted",
+      async () => {
+        await Index.getLastAccepted(encoding, "/ext/index/C/block")
+      },
+      (x) => x,
+      Matcher.toThrow,
+      () => "not found"
+    ],
+
+    [
+      "getCContainerByIndex",
+      async () => {
+        await Index.getContainerByIndex("0", encoding, "/ext/index/C/block")
+      },
+      (x) => x,
+      Matcher.toThrow,
+      () => "no containers have been accepted"
+    ],
+    [
+      "getCContainerRange",
+      async () => {
+        await Index.getContainerRange(0, 100, "hex", "/ext/index/C/block")
+      },
+      (x) => x,
+      Matcher.toThrow,
+      () => "no containers have been accepted"
+    ],
+    [
+      "getCIndex",
+      async () => {
+        Index.getIndex(cContainerID, "hex", "ext/index/C/block")
+      },
+      (x) => x,
+      Matcher.toBe,
+      () => undefined
+    ],
+    [
+      "getCisAccepted",
+      async () => {
+        Index.isAccepted(cContainerID, "hex", "ext/index/C/block")
+      },
+      (x) => x,
+      Matcher.toBe,
+      () => undefined
     ]
   ]
 
