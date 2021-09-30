@@ -204,6 +204,52 @@ describe("Index", () => {
       (x) => x,
       Matcher.toBe,
       () => undefined
+    ],
+    [
+      "getPLastAccepted",
+      async () => {
+        await Index.getLastAccepted(encoding, "/ext/index/P/block")
+      },
+      (x) => x,
+      Matcher.toThrow,
+      () => "no containers have been accepted"
+    ],
+
+    [
+      "getPContainerByIndex",
+      async () => {
+        await Index.getContainerByIndex("0", encoding, "/ext/index/P/block")
+      },
+      (x) => x,
+      Matcher.toThrow,
+      () => "no containers have been accepted"
+    ],
+    [
+      "getPContainerRange",
+      async () => {
+        await Index.getContainerRange(0, 100, "hex", "/ext/index/P/block")
+      },
+      (x) => x,
+      Matcher.toThrow,
+      () => "no containers have been accepted"
+    ],
+    [
+      "getPIndex",
+      async () => {
+        Index.getIndex(cContainerID, "hex", "ext/index/P/block")
+      },
+      (x) => x,
+      Matcher.toBe,
+      () => undefined
+    ],
+    [
+      "getPisAccepted",
+      async () => {
+        Index.isAccepted(cContainerID, "hex", "ext/index/P/block")
+      },
+      (x) => x,
+      Matcher.toBe,
+      () => undefined
     ]
   ]
 
