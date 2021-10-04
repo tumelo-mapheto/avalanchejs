@@ -179,8 +179,8 @@ describe("XChain", (): void => {
       "import",
       () => xchain.import(user, passwd, addrB.value, "C"),
       (x) => x,
-      Matcher.toThrow,
-      () => "problem issuing transaction: no import inputs"
+      Matcher.toMatch,
+      () => /w+/
     ],
     [
       "importAVAX",
