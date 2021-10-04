@@ -9,15 +9,8 @@ describe("Index", () => {
   let addrB = { value: "" }
 
   const avalanche: Avalanche = getAvalanche()
-  const xchain: AVMAPI = avalanche.XChain()
-  const keystore = new KeystoreAPI(avalanche)
-  const Index: IndexAPI = avalanche.Index()
 
-  const user: string = "avalancheJsPChainUser"
-  const passwd: string = "avalancheJsPAssw4rd"
-  const whaleAddr: string = "X-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u"
-  const key: string =
-    "PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN"
+  const Index: IndexAPI = avalanche.Index()
 
   const encoding: string = "hex"
   const baseurl: string = "/ext/index/X/tx"
@@ -29,44 +22,6 @@ describe("Index", () => {
 
   // test_name          response_promise               resp_fn                 matcher           expected_value/obtained_value
   const tests_spec: any = [
-    // [
-    //   "createUser",
-    //   () => keystore.createUser(user, passwd),
-    //   (x) => x,
-    //   Matcher.toBe,
-    //   () => true
-    // ],
-    // [
-    //   "importKey",
-    //   () => xchain.importKey(user, passwd, key),
-    //   (x) => x,
-    //   Matcher.toBe,
-    //   () => whaleAddr
-    // ],
-    // [
-    //   "createaddrB",
-    //   () => xchain.createAddress(user, passwd),
-    //   (x) => x,
-    //   Matcher.Get,
-    //   () => addrB
-    // ],
-    // [
-    //   "send",
-    //   () =>
-    //     xchain.send(
-    //       user,
-    //       passwd,
-    //       "AVAX",
-    //       10,
-    //       addrB.value,
-    //       [whaleAddr],
-    //       whaleAddr,
-    //       "MEMO"
-    //     ),
-    //   (x) => x.txID,
-    //   Matcher.Get,
-    //   () => tx
-    // ],
     [
       "getXLastAccepted",
       async () => {
@@ -89,7 +44,7 @@ describe("Index", () => {
     [
       "getXContainerRange",
       async () => {
-        await Index.getContainerRange(0, 100, "hex", "/ext/index/X/tx")
+        await Index.getContainerRange(0, 100, encoding, "/ext/index/X/tx")
       },
       (x) => x,
       Matcher.toThrow,
@@ -98,7 +53,7 @@ describe("Index", () => {
     [
       "getXIndex",
       async () => {
-        Index.getIndex(cContainerID, "hex", "ext/index/X/tx")
+        Index.getIndex(cContainerID, encoding, "ext/index/X/tx")
       },
       (x) => x,
       Matcher.toBe,
@@ -107,7 +62,11 @@ describe("Index", () => {
     [
       "getXisAccepted",
       async () => {
-        Index.isAccepted(cContainerID, "hex", "ext/index/X/tx")
+        Index.isAccepted(
+          "6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY",
+          encoding,
+          "ext/index/X/tx"
+        )
       },
       (x) => x,
       Matcher.toBe,
@@ -119,23 +78,22 @@ describe("Index", () => {
         await Index.getLastAccepted(encoding, "/ext/index/X/vtx")
       },
       (x) => x,
-      Matcher.toThrow,
-      () => "no containers have been accepted"
+      Matcher.toEqual,
+      () => "not found"
     ],
-
     [
       "getXVerticeContainerByIndex",
       async () => {
         await Index.getContainerByIndex("0", encoding, "/ext/index/X/vtx")
       },
       (x) => x,
-      Matcher.toThrow,
-      () => "not found"
+      Matcher.toEqual,
+      () => "no container at index 0"
     ],
     [
       "getXVerticeContainerRange",
       async () => {
-        await Index.getContainerRange(0, 100, "hex", "/ext/index/X/vtx")
+        await Index.getContainerRange(0, 100, encoding, "/ext/index/X/vtx")
       },
       (x) => x,
       Matcher.toThrow,
@@ -144,7 +102,7 @@ describe("Index", () => {
     [
       "getXVerticeIndex",
       async () => {
-        Index.getIndex(cContainerID, "hex", "ext/index/X/vtx")
+        Index.getIndex(cContainerID, encoding, "ext/index/X/vtx")
       },
       (x) => x,
       Matcher.toBe,
@@ -153,7 +111,7 @@ describe("Index", () => {
     [
       "getXVerticeisAccepted",
       async () => {
-        Index.isAccepted(cContainerID, "hex", "ext/index/X/vtx")
+        Index.isAccepted(cContainerID, encoding, "ext/index/X/vtx")
       },
       (x) => x,
       Matcher.toBe,
@@ -165,7 +123,7 @@ describe("Index", () => {
         await Index.getLastAccepted(encoding, "/ext/index/C/block")
       },
       (x) => x,
-      Matcher.toThrow,
+      Matcher.toEqual,
       () => "not found"
     ],
 
@@ -175,22 +133,22 @@ describe("Index", () => {
         await Index.getContainerByIndex("0", encoding, "/ext/index/C/block")
       },
       (x) => x,
-      Matcher.toThrow,
-      () => "no containers have been accepted"
+      Matcher.toEqual,
+      () => undefined
     ],
     [
       "getCContainerRange",
       async () => {
-        await Index.getContainerRange(0, 100, "hex", "/ext/index/C/block")
+        await Index.getContainerRange(0, 100, encoding, "/ext/index/C/block")
       },
       (x) => x,
       Matcher.toThrow,
-      () => "no containers have been accepted"
+      () => undefined
     ],
     [
       "getCIndex",
       async () => {
-        Index.getIndex(cContainerID, "hex", "ext/index/C/block")
+        Index.getIndex(cContainerID, encoding, "ext/index/C/block")
       },
       (x) => x,
       Matcher.toBe,
@@ -199,7 +157,7 @@ describe("Index", () => {
     [
       "getCisAccepted",
       async () => {
-        Index.isAccepted(cContainerID, "hex", "ext/index/C/block")
+        Index.isAccepted(cContainerID, encoding, "ext/index/C/block")
       },
       (x) => x,
       Matcher.toBe,
@@ -211,8 +169,8 @@ describe("Index", () => {
         await Index.getLastAccepted(encoding, "/ext/index/P/block")
       },
       (x) => x,
-      Matcher.toThrow,
-      () => "no containers have been accepted"
+      Matcher.toBe,
+      () => "not found"
     ],
 
     [
@@ -227,7 +185,7 @@ describe("Index", () => {
     [
       "getPContainerRange",
       async () => {
-        await Index.getContainerRange(0, 100, "hex", "/ext/index/P/block")
+        await Index.getContainerRange(0, 100, encoding, "/ext/index/P/block")
       },
       (x) => x,
       Matcher.toThrow,
@@ -236,7 +194,7 @@ describe("Index", () => {
     [
       "getPIndex",
       async () => {
-        Index.getIndex(cContainerID, "hex", "ext/index/P/block")
+        Index.getIndex(cContainerID, encoding, "ext/index/P/block")
       },
       (x) => x,
       Matcher.toBe,
@@ -245,7 +203,7 @@ describe("Index", () => {
     [
       "getPisAccepted",
       async () => {
-        Index.isAccepted(cContainerID, "hex", "ext/index/P/block")
+        Index.isAccepted(cContainerID, encoding, "ext/index/P/block")
       },
       (x) => x,
       Matcher.toBe,
