@@ -158,7 +158,7 @@ export class IndexAPI extends JRPCAPI {
       "index.getIndex",
       params
     )
-    return response.data.result
+    return response.data.result.index
   }
 
   /**
