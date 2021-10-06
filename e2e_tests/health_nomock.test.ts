@@ -9,8 +9,8 @@ describe("Info", () => {
   // test_name          response_promise               resp_fn                 matcher           expected_value/obtained_value
   const tests_spec: any = [
     [
-      "getLiveness",
-      () => health.getLiveness(),
+      "healthResponse",
+      () => health.health(),
       (x) => {
         return x.healthy
       },
